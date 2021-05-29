@@ -17,4 +17,11 @@ public class Node {
     public void addChildren(Node n) {
     	children.add(n);
     }
+
+	@Override
+	public String toString() {
+		return "Node [ID=" + ID + ", memory_start=" + memory_start + ", memory_end=" + memory_end + ", Marked=" + Marked
+				+ ", children=" + children + "]";
+	}
+    
  }

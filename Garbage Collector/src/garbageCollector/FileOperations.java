@@ -1,35 +1,40 @@
 package garbageCollector;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class FileOperations {
-	
-	public void readheap(String path,ArrayList<Node> heap) {
+	public static final String UTF8_BOM = "\uFEFF";
+	public static void readheap(String path,ArrayList<Node> heap) {
 		try {
-			File file = new File(path);
-			String row ;
 			String [] rowData;
-			Scanner reader = new Scanner(file);
-			while ((row = reader.nextLine()) != null) {
+			Scanner reader = new Scanner(new InputStreamReader(new FileInputStream(path),"UTF-8"));
+			while (reader.hasNext()) {
+				String row = reader.next();
+				while (row.startsWith(UTF8_BOM)) {
+					row = row.substring(1);
+				}
 				rowData =row.split(",");
 				heap.add(new Node(Integer.parseInt(rowData[0]),Integer.parseInt(rowData[1]),Integer.parseInt(rowData[2])));
 			}
 			reader.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	public void readRoot(String rootpath,ArrayList<Node> heap,ArrayList<Node> root) {
+	public static void readRoot(String rootpath,ArrayList<Node> heap,ArrayList<Node> root) {
 		String row ;
 		int id;
 		try {
-			File file = new File(rootpath);
-			Scanner reader = new Scanner(file);
-			while ((row = reader.nextLine()) != null) {
+			Scanner reader = new Scanner(new InputStreamReader(new FileInputStream(rootpath),"UTF-8"));
+			while (reader.hasNext()) {
+				row = reader.next();
+				while (row.startsWith(UTF8_BOM)) {
+					row = row.substring(1);
+				}
 				id = Integer.parseInt(row);
 				for (Node n : heap) {
 					if (n.ID==id) {
@@ -37,23 +42,24 @@ public class FileOperations {
 						break;
 					}
 				}
-			
 			}
 			reader.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void setPointer(String pointerPath,ArrayList<Node> heap) {
+	public static void setPointer(String pointerPath,ArrayList<Node> heap) {
 		String row ;
 		String rowData[];
 		int ID1,ID2;
 		try {
-			File file = new File(pointerPath);
-			Scanner reader = new Scanner(file);
-			while ((row = reader.nextLine()) != null) {
+			Scanner reader = new Scanner(new InputStreamReader(new FileInputStream(pointerPath),"UTF-8"));
+			while (reader.hasNext()) {
+				row = reader.next();
+				while (row.startsWith(UTF8_BOM)) {
+					row = row.substring(1);
+				}
 				rowData = row.split(",");
 				ID1 = Integer.parseInt(rowData[0]);
 				ID2 = Integer.parseInt(rowData[1]);
@@ -68,11 +74,9 @@ public class FileOperations {
 						break;
 					}
 				}
-			
 			}
 			reader.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
