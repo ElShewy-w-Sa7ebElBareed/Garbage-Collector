@@ -18,6 +18,10 @@ public class Node {
 	public void addChildren(Node n) {
 		children.add(n);
 	}
+	
+	public ArrayList<Node> getChildren() {
+		return children;
+	}
 
 	@Override
 	public String toString() {
