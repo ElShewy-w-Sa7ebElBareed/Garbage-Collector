@@ -1,6 +1,8 @@
 package garbageCollector;
 
 import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -79,6 +81,19 @@ public class FileOperations {
 			}
 			reader.close();
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void writeHeapFile(String Path , ArrayList<Node> newheap) {
+		try {
+			FileWriter f = new FileWriter(Path);
+			for(Node n : newheap) {
+				f.append(n.ID+","+n.memory_start+","+n.memory_end+"\n");
+			}
+			//f.flush();
+			f.close();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
