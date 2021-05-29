@@ -7,10 +7,10 @@ public class CopyGC {
 	public static void main(String[] args) {
 		ArrayList<Node> heap = new ArrayList<Node>();
 		ArrayList<Node> root = new ArrayList<Node>();
-		FileOperations.readheap("D:\\Study\\Faculty of Engineering\\2nd year\\2nd Term\\Paradigm\\Labs\\sample test/heap.csv", heap);
-		FileOperations.readRoot("D:\\Study\\Faculty of Engineering\\2nd year\\2nd Term\\Paradigm\\Labs\\sample test/roots.txt", heap, root);
-		FileOperations.setPointer("D:\\Study\\Faculty of Engineering\\2nd year\\2nd Term\\Paradigm\\Labs\\sample test/pointers.csv", heap);
-		FileOperations.writeHeapFile("D:\\Copy_new-heap.csv",CopyGC.copyGC(heap, root));
+		FileOperations.readheap(args[0]+"heap.csv", heap);
+		FileOperations.readRoot(args[1]+"roots.txt", heap, root);
+		FileOperations.setPointer(args[2]+"pointers.csv", heap);
+		FileOperations.writeHeapFile(args[4]+"/Copy_new-heap.csv",CopyGC.copyGC(heap, root));
 	}
 
 	private static ArrayList<Node> copyGC(ArrayList<Node> fromSpace, ArrayList<Node> root) {
