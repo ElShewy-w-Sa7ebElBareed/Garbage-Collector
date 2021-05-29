@@ -14,16 +14,18 @@ public class Mark_Compact_GC {
 	private static void DFS(Node n) {
 		if(!n.children.isEmpty()) {
 			for (Node r : n.children) {
-				r.Marked=true;
-				DFS(r);
+				if(!r.Marked) {
+					r.Marked=true;
+					DFS(r);}
 			}
 		}
 	}
 	private static ArrayList<Node> MarkAndCompact(ArrayList<Node> fromSpace, ArrayList<Node> root) {
 		ArrayList<Node> toSpace = new ArrayList<>();
 		for (Node r : root) {
+			if(!r.Marked) {
 			r.Marked=true;
-			DFS(r);
+			DFS(r);}
 		}
 		int start = 0;
 		for (Node n : fromSpace) {
