@@ -6,11 +6,10 @@ public class Mark_Compact_GC {
 	public static void main(String[] args) {
 		ArrayList<Node> heap = new ArrayList<Node>();
 		ArrayList<Node> root = new ArrayList<Node>();
-		FileOperations.readheap("C:/Users/Ahmed Ashraf/Desktop/sample test/heap.csv", heap);
-		FileOperations.readRoot("C:/Users/Ahmed Ashraf/Desktop/sample test/roots.txt", heap, root);
-		FileOperations.setPointer("C:/Users/Ahmed Ashraf/Desktop/sample test/pointers.csv", heap);
-		FileOperations.writeHeapFile("C:/Users/Ahmed Ashraf/Desktop/sample test/Ahmed.csv",Mark_Compact_GC.MarkAndCompact(heap, root));
-		
+		FileOperations.readheap(args[0]+"/heap.csv", heap);
+		FileOperations.readRoot(args[1]+"/roots.txt", heap, root);
+		FileOperations.setPointer(args[2]+"/pointers.csv", heap);
+		FileOperations.writeHeapFile(args[3]+"/Mark&Compact_new-heap.csv",Mark_Compact_GC.MarkAndCompact(heap, root));
 	}
 	private static void DFS(Node n) {
 		if(!n.children.isEmpty()) {
@@ -36,9 +35,9 @@ public class Mark_Compact_GC {
 				toSpace.add(n);
 			}
 		}
-		for (Node n : toSpace) {
+		/*for (Node n : toSpace) {
 			System.out.println(n.ID+"  "+n.memory_start+"  "+n.memory_end);
-		}
+		}*/
 		
 		return toSpace;
 	}
